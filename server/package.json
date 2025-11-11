@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "this is the backend server which is gonna handle routes controllers models db and ai services for this application ",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
