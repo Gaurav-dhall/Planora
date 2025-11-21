@@ -125,3 +125,12 @@ exports.logoutUser = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 }
+
+// exports.testingProtectedRoute = async (req, res) => {
+//   try {
+//     res.status(200).json({ message: "You have accessed a protected route", user: req.user });
+//   } catch (error) {
+//     console.error("Protected Route Error:", error);
+//     res.status(500).json({ message: "Internal server error" });
+//   }
+// }

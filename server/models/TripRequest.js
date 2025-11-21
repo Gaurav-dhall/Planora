@@ -25,6 +25,7 @@ const tripRequestSchema = new mongoose.Schema({
     },
     tourType: {
         type: String,
+        enum:["Adventure","Mountains","Beaches","Cultural","All"],
         required: true
     },
     tripType: {
@@ -43,12 +44,12 @@ const tripRequestSchema = new mongoose.Schema({
     },
     stayPreferences: {
         type: String,
-        enum: ["3 star hotel", "5 star hotel", "budget"],
+        enum: ["3 star hotel", "5 star hotel", "budget hotel","resort"],
         required: true
     },
     travelPreferences: {
         type: String,
-        enum: ["bus", "train", "flight", "own"],
+        enum: ["bus", "train", "flight", "own vehicle"],
         required: true
     },
     createdAt: {
