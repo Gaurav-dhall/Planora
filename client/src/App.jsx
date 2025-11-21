@@ -7,6 +7,7 @@ import Footer from './components/Footer'
 import Signup from'./pages/Signup'
 import RequirementPage from './pages/RequirementPage'
 import ResponsePage from './pages/ResponsePage'
+import MyPlans from './pages/MyPlans'
 function App() {
   return (
     <div className="App">
@@ -19,7 +20,7 @@ function App() {
         <Route path="/requirementpage" element={<RequirementPage />} />
            {/* Dynamic page with unique ID */}
         <Route path="/response/:id" element={<ResponsePage />} />
-
+       <Route path="/myplans" element={<MyPlans />} />
       </Routes>
       <Footer />
     </div>
