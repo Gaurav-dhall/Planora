@@ -19,34 +19,39 @@ const app = express();
 
 const __dirnameResolved =__dirname;
 
-// static serve
-app.use(express.static(path.join(__dirnameResolved, "../client/dist")));
-
-// SPA fallback
-app.use((req, res) => {
-  res.sendFile(path.join(__dirnameResolved, "../client/dist/index.html"));
-});
-
-app.use((req, res, next) => {
-  res.removeHeader("Access-Control-Allow-Origin");
-  res.header("Access-Control-Allow-Origin", "http://localhost:5173");
-  res.header("Access-Control-Allow-Credentials", "true");
-  next();
-});
+// middleware
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://127.0.0.1:5173",
+  "https://planora-pjrg.onrender.com/"
+];
 
 app.use(cors({
-    origin: "http://localhost:5173",
-    credentials: true
+  origin: function (origin, callback) {
+    // allow requests with no origin (mobile apps, curl, postman)
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true
 }));
-
-
 app.use(cookieParser());
 
 app.use(express.json());
 
 
-connectDB();
 app.use(express.urlencoded({ extended: true }));
+
+connectDB();
+
+
+
+
+
 
 app.use("/api/test",testRoutes);
 app.use("/api/users",userRoutes);
@@ -55,6 +60,16 @@ app.use("/api/itinerary",itineraryRoutes);
 app.get("/api/hello", (req, res) => {
   res.json({ message: "API working" });
 });
+
+
+// static serve
+app.use(express.static(path.join(__dirnameResolved, "../client/dist")));
+
+// SPA fallback
+app.use((req, res) => {
+  res.sendFile(path.join(__dirnameResolved, "../client/dist/index.html"));
+});
+
 
 
 
